@@ -12,6 +12,7 @@ ul.main_tabs li {
     float: left;
     padding: 0 15px;
     margin-left: -1px;
+    cursor: pointer;
 }
 ul.main_tabs li.current {
     border: 1px solid #ddd;
@@ -22,7 +23,7 @@ ul.main_tabs li.current {
     height: 32px;
     line-height: 32px;
 }
-ul.main_tabs li.current a {
+ul.main_tabs li.current span {
     color: #e4393c;
 }
 ul.main_tabs {
@@ -47,14 +48,46 @@ ul.main_tabs {
     content: '';
     clear: both;
 }
-#preview > p {
-    width: 347px;
-    height: 355px;
+
+#preview {
+    float: left;
+    position: relative;
+}
+#preview #mediumDiv {
+    width: 350px;
+    height: 350px;
     border: 1px solid #ddd;
     margin-bottom: 5px;
+    position: relative;
 }
 img {
     vertical-align: bottom;
+}
+
+#preview #mask {
+  width: 175px;
+  height: 175px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #ffa;
+  opacity: .4;
+  display: none;
+}
+#preview #superMask {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: move;
+}
+
+#preview > div:after {
+  content: "";
+  display: block;
+  clear: both;
 }
 #preview > div > a {
     float: left;
@@ -65,26 +98,60 @@ img {
 #preview > div > a.left_disabled {
     background-position: -68px -139px;
 }
+#preview > div a.left {
+    background-position: 0px -139px; 
+}
+#preview > div a.left:hover {
+    background-position: -34px -139px;
+}
+
+#preview > div > a.right_disabled {
+    background-position: -85px -139px;
+}
 #preview > div a.right {
     background-position: -17px -139px; 
 }
 #preview > div a.right:hover {
     background-position: -51px -139px;
 }
+
 /* 小图 */
-#preview ul {
+#preview #icon_box {
+    width: 310px;
+    height: 54px;
     margin-left: 8px;
+    overflow: hidden;
+    position: relative;
+}
+#preview ul {
+    width: 500px;
+    height: 54px;
+    overflow: hidden;
+    position: absolute;
 }
 #preview li {
     float: left;
     border: 1px solid #cecece;
     margin-right: 8px;
     padding: 1px;
+    
 }
 #preview li:hover {
     border: 2px solid #e4393c;
     padding: 0;
 }
+#preview > #largeDiv{
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: #fff;
+    border: 1px solid #ddd;
+    top: 0;
+    left: 355px;
+    z-index: 999;
+    display: none;
+}
+
 /* 文字信息 */
 #detail {
     width: 850px;
@@ -159,7 +226,7 @@ img {
     right: 5px;
     background: url('../Images/background_list.png') -30px -40px no-repeat;
 }
-#store_select h3:hover {
+#store_select h3:hover, #store_select h3.hover {
     border-bottom: 2px solid #fff;
     position: relative;
     z-index: 200;
@@ -214,9 +281,9 @@ img {
     display: none;
 }
 /* 鼠标移上去显示弹出地址 */
-#store_select:hover #address{
+/*#store_select:hover #address{
     display: block;
-}
+}*/
 /* 选择部分 */
 #choose {
     width: 600px;
@@ -416,6 +483,9 @@ img {
     margin: 10px 0;
 }
 /* 商品介绍具体信息 */
+#product_info {
+  display: none;
+}
 #product_info ul.m_content {
     padding: 10px;
 }
@@ -443,41 +513,44 @@ img {
     padding-right: 10px;
 }
 /* 规格参数-具体内容 */
-#tbl {
+#product_data, #product_packge {
     width: 990px;
     border: 1px solid #ddd;
     border-collapse: collapse;
     box-sizing: border-box;
+    margin-top: 10px;
+    display: none;
 }
-#tbl td {
+#product_data td, #product_packge td {
     border: 1px solid #ddd;
     padding: 5px;
 }
-#tbl tr:first-child td {
+#product_data tr:first-child td, #product_packge tr:first-child td {
     text-align: center;
     font-weight: 600;
     background-color: #f5fafe;
 }
-#tbl tr:not(:first-child) td:first-child {  /*除了第一个tr的每一tr的第一个td*/
+#product_data tr:not(:first-child) td:first-child, #product_packge tr:not(:first-child) td:first-child {  /*除了第一个tr的每一tr的第一个td*/
     background-color: #f5fafe;
     text-align: right;
     width: 100px;
 }
 /* 商品评价-具体内容 */
-#comment {
+#product_comment {
     margin: 10px 0;
+    display: none;
 }
-#comment div.rate {
+#product_comment div.rate {
     float: left;
     width: 200px;
     text-align: center;
     padding-bottom: 15px;
 }
-#comment div.rate b {
+#product_comment div.rate b {
     font-size: 46px;
     color: #e4393c;
 }
-#comment div.rate span {
+#product_comment div.rate span {
     font-size: 24px;
     color: #e4393c;
 }
@@ -541,6 +614,17 @@ div.jingdou a {
     background: linear-gradient(to bottom, #f4fbef, #ecf7e3);
     margin-top: 15px;
     text-decoration: none;
+}
+#product_server {
+  display: none;
+} 
+#state strong {
+    color: #e4393c;
+}
+#product_details .show {
+    display: block;
+}
+#product_details .show_tbl {
 }
 /* 评论内容 */
 #comment_content {
@@ -688,7 +772,7 @@ div.comment_detail p.btns {
     background-color: #f0f9ea;
     border-radius: 5px;
 }
-#consult a.send {
+#consult span.send {
     display: block;
     width: 68px;
     height: 28px;

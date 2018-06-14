@@ -86,7 +86,6 @@ li.dakehu a {
     background: url('../Images/dakehu.jpg') left center no-repeat;
     padding-left: 30px;
 }
-
 li.app_jd a {
     display: inline-block;
     background: url('../Images/iconlist_2.png') -128px -357px no-repeat;
@@ -96,58 +95,6 @@ li.app_jd a {
 li.app_jd a:hover {
     background-position: -128px -396px;
 }
-
-li.app_jd>ul {
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-
-/*top部分，“手机京东”的弹出菜单*/
-#app_jd_items{
-    display:none;
-    position:absolute;
-    left: 6px;
-    top:30px;
-    z-index:3;
-    width: 215px;
-    height:214px;
-    padding: 50px 0 20px 20px;
-    border:1px solid #DDD;
-    border-top:1px solid #fff;
-    box-shadow:0 0 10px #DDD;
-    background:#fff url(../Images/app_jd_1.png) 10px 10px no-repeat;
-}
-#app_jd_items div.app,#app_jd_items div.bank {
-    height:110px;
-    padding-left:100px;
-}
-#app_jd_items div.app {
-    background:url(../Images/app_jd_erwei.jpg) 15px center no-repeat;
-}
-#app_jd_items div.bank {
-    background:url(../Images/app_jd_wangyin.png) 15px center no-repeat;
-}
-#app_jd_items h3 {
-    text-align:left;
-    padding-left:3px;
-    color: #E4393C;
-}
-#app_jd_items a {
-    width: 97px;
-    height: 29px;
-    display: block;
-    margin-bottom:6px;
-}
-#app_jd_items a.app {
-    background:url(../Images/iconlist_2.png) 0px -360px no-repeat;
-}
-#app_jd_items a.android {
-    background:url(../Images/iconlist_2.png) 0px -399px no-repeat;
-}
-
-
 li.service > a {
     display: inline-block;
     height: 26px;
@@ -315,26 +262,6 @@ li.service > a:hover + #service_items {
 }
 
 /************** banner 部分 **************/
-#category {
-    width:210px;
-    float:left;
-    background: #CD2A2C;
-    position:absolute;
-}
-
-/*全部商品分类*/
-#category>a{
-    display: inline-block;
-    height: 40px;
-    padding-left    : 20px;
-    line-height: 40px;
-    color: #fff;
-    font-size:14px;
-    font-weight:bold;
-    text-decoration:none;
-}
-
-
 #cate_box {
     width: 210px;
     height: 410px;
@@ -343,8 +270,6 @@ li.service > a:hover + #service_items {
     box-sizing: border-box;
     padding-top: 5px;
     background-color: #fafafa;
-    display: none;
-    z-index: 10;
 }
 #cate_box > li > a {
     display: block;
@@ -357,11 +282,11 @@ li.service > a:hover + #service_items {
     color: #333;
     text-decoration: none;
 }
-#cate_box > li > a:hover, #cate_box > li > a.hover {
+#cate_box > li > a:hover {
     background-color: #fff;
     border-color: #ddd;
     position: relative;
-    z-index: 2000;
+    z-index: 50;
 }
 /* 分类信息 */
 #cate_box {
@@ -376,7 +301,7 @@ li.service > a:hover + #service_items {
     position: absolute;
     top: 0;
     left: 195px;
-    z-index: 1000;
+    z-index: 10;
 }
 /* 子分类信息 */
 #sub_cate_box div.close {
@@ -434,6 +359,9 @@ li.service > a:hover + #service_items {
 /* 隐藏弹出菜单 */
 #sub_cate_box {
     display: none;
+}
+#cate_box > li:hover #sub_cate_box {
+    display: block;
 }
 #banner {
     display: none;
